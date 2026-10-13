@@ -2,6 +2,7 @@ import AppKit
 
 MainActor.assumeIsolated {
     let app = NSApplication.shared
+    NotebookMigration.run()
     let delegate = AppDelegate()
     app.delegate = delegate
     app.setActivationPolicy(.accessory)

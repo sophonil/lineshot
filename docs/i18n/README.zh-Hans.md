@@ -1,192 +1,50 @@
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="../images/zh-Hans/hero-dark.png">
-  <img src="../images/zh-Hans/hero-light.png" alt="Tendedero。截图挂起来晾着。三张截图装在玻璃相框里，挂在 macOS 菜单栏下方的一根细绳上。">
-</picture>
+# LineNote
 
-<h3 align="center"><a href="https://tendedero.app/?lang=zh-Hans">在 tendedero.app 上直接用浏览器试用&nbsp;&rsaquo;</a></h3>
+把截图、复制的文本和待办记事本挂在屏幕顶部，随用随取。
 
-<p align="center">
-  免费开源。适用于 macOS 14 及以上。
-  <br>
-  <a href="../../../../releases/latest">下载&nbsp;&rsaquo;</a>
-  &nbsp;&nbsp;
-  <a href="#从源码构建">从源码构建&nbsp;&rsaquo;</a>
-  <br><br>
-  <a href="../../README.md">English</a>&nbsp;·&nbsp;<a href="README.es.md">Español</a>&nbsp;·&nbsp;<a href="README.gl.md">Galego</a>&nbsp;·&nbsp;<a href="README.fr.md">Français</a>&nbsp;·&nbsp;<a href="README.pt-BR.md">Português (Brasil)</a>&nbsp;·&nbsp;<a href="README.ja.md">日本語</a>&nbsp;·&nbsp;<a href="README.ko.md">한국어</a>&nbsp;·&nbsp;简体中文&nbsp;·&nbsp;<a href="README.tr.md">Türkçe</a>&nbsp;·&nbsp;<a href="README.az.md">Azərbaycanca</a>
-  <br>
-  <sub>本文译自英文 README。如有出入，以英文版为准。</sub>
-</p>
+这是 sophonil 基于 Alejandro Buján 的 [Tendedero](https://github.com/alejandrobujan/tendedero) 制作的独立 Fork，保留原项目历史与交互风格。不是原作者的官方版本，也不代表原作者认可。本版使用独立名称和新图标。
 
-<p align="center">
-  <a href="https://trendshift.io/repositories/287033?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-287033" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/287033/daily?language=Swift" alt="alejandrobujan%2Ftendedero | Trendshift" width="250" height="55"/></a>
-  <a href="https://trendshift.io/repositories/287033?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-287033" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/287033/weekly?language=Swift" alt="alejandrobujan%2Ftendedero | Trendshift" width="250" height="55"/></a>
-</p>
+[English](../../README.md) · [发布版本](https://github.com/sophonil/linenote/releases)
 
-<br>
+## 新增功能
 
-## 看不见，却够得着
+- **文本剪贴板**：在菜单中开启「悬挂复制的文本」，复制的纯文本即可上绳。单击复制完整原文，保留换行、缩进和 Unicode。默认关闭，跳过带隐私/临时标记的剪贴板、空白文本和超过 1 MiB 的文本。
+- **固定待办与随手记**：点击第一张卡片即可添加、编辑、勾选、删除待办，下方可以写多行备注。输入后按回车添加待办；已添加的任务和备注自动保存，重启后恢复。
+- **整体居中**：只有待办时居中；增加截图和文本后，整组向两侧展开，待办始终排在第一张。超出容量时，其余卡片可以滚动。
 
-你每截一张图，它都会挂到屏幕顶上的一根绳上。
-把指针停在菜单栏，绳子就滑下来；移开，它就收起。
+原来的夹子、玻璃相框、截图操作和自动收起行为保留。「全部取下」只清空截图和文本，不影响待办。App 自己目录中的文件会移到废纸篓，其他位置的文件仅从绳子上移除；没有内容可取下时，该菜单变灰。
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="../images/zh-Hans/demo-dark.gif">
-  <img src="../images/zh-Hans/demo-light.gif" alt="指针停在上边缘，绳子带着三张截图轻轻摇晃着滑下来，单击复制其中一张，指针离开后绳子收起。">
-</picture>
+## 安装与数据
 
-<br>
-<br>
+支持 macOS 14 及以后，构建包兼容 Apple 芯片和 Intel Mac。
 
-## 每个动作都有手势
+先退出旧 App，再解压发布 ZIP，将 **LineNote.app** 拖入「应用程序」。本地构建默认使用 ad hoc 签名，未经 Apple 公证；有 Developer ID 时可自行签名。
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="../images/zh-Hans/bento-dark.png">
-  <img src="../images/zh-Hans/bento-light.png" alt="单击复制。长按标记。拖拽分享。松手放下。">
-</picture>
+新版使用独立 Bundle ID `io.github.sophonil.LineNote`，截图保存在 `~/Library/Application Support/LineNote/Screenshots`。第一次启动时，会复制之前个人开发版里已有的待办与随手记，不修改旧数据。截图接管、剪贴板开关和旧卡片路径不会迁移，需要时请在菜单重新开启。不要同时运行两份会接管截图的 App。
 
-<br>
-<br>
-
-| | |
-|:--|:--|
-| 单击 | 复制这张图。 |
-| 长按 | 用「标记」打开。 |
-| 双击 | 用「预览」打开。 |
-| 用力点按 | 用「快速查看」看一眼。 |
-| 拖进 App | 送一份副本过去。原图仍挂在绳上。 |
-| 拖进文件夹 | 存在那儿。原图从绳上取下。 |
-| 拖到废纸篓，或点叉 | 松手丢弃。 |
-| 指针停在菜单栏 | 在那一块屏幕上放下绳子。 |
-| 点击菜单栏任意处 | 把绳子收起来。 |
-| <kbd>⌃</kbd>&thinsp;<kbd>⌥</kbd>&thinsp;<kbd>T</kbd> | 显示或隐藏绳子。可在菜单栏的「快捷键」中更改。 |
-
-<br>
-
-## 桌面，终于清爽了
-
-把截图交给 Tendedero<sup>1</sup>，它们就完全跳过桌面。
-没有浮动缩略图。不用等五秒。拍下的瞬间即挂上绳，只有你拖出去的才会留下。
-
-屏幕录制也会挂上绳，上面带一个播放按钮。按住即可剪辑。
-
-同样的快捷键。同样的肌肉记忆。只是少了乱。
-
-<br>
-
-## 复制的图片也一样
-
-按住 <kbd>⌃</kbd> 截图，或在「预览」中复制图片，它就会像其他截图一样挂上绳。
-在菜单栏中打开「挂上复制的图片」，开启期间图标里的衬衫会被填满。只挂图片：
-与文字或文件一起复制的内容，以及密码管理器标为私密的内容，都不会被挂上。
-
-<br>
-
-## 隐私是设计前提
-
-没有账号。不联网。无统计。
-Tendedero 完全在你的 Mac 上运行，截图不会离开这台电脑。
-
-<br>
-
-## 技术规格
-
-| | |
-|:--|:--|
-| **兼容性** | macOS 14 Sonoma 及以上，Apple 芯片与 Intel 均支持。已针对 macOS 27 设计。 |
-| **体积** | 1.7 MB |
-| **语言** | 英语、西班牙语、加利西亚语、法语、巴西葡萄牙语、日语、韩语、简体中文、土耳其语、阿塞拜疆语 |
-| **技术栈** | Swift、AppKit 与 SwiftUI |
-| **网络访问** | 无 |
-| **价格** | 免费 |
-| **许可** | 代码为 MIT。名称与图标不在授权范围内。 |
-
-<br>
-
-## 安装
-
-从[最新发布](../../../../releases/latest)下载磁盘映像，打开后把 Tendedero 拖进「应用程序」。也可以用 Homebrew 安装：
-
-```sh
-brew install --cask alejandrobujan/tap/tendedero
-```
-
-Tendedero 已使用 Developer ID 签名并通过 Apple 公证，打开方式和其他 App 一样。
-
-<br>
+不新增账号、分析统计或内容上传。文本保存为本地 UTF-8 文件，创建时仅当前用户可读写；待办和备注使用本地偏好存储。「检查更新」打开此 Fork 的 GitHub 发布页。
 
 ## 从源码构建
 
 ```sh
-git clone git@github.com:alejandrobujan/tendedero.git
-cd tendedero
+git clone https://github.com/sophonil/linenote.git
+cd linenote
+git switch feature/customizations
 scripts/build-app.sh
-open build/Tendedero.app
+open build/LineNote.app
 ```
 
-需要 Swift 工具链，Xcode 可选。若使用 macOS 27 的命令行工具，脚本会回退到随其一同安装的 macOS 26 SDK，因为新版 SDK 需要只有 Xcode 才带的 SwiftUI 宏插件。本地构建采用 ad-hoc 签名，所以每次重新构建后 macOS 都会再次询问桌面访问权限。
+需要 Swift 工具链。内部模块及源码目录保留 `Tendedero` 名称，方便与上游比较。检查命令：
 
-<details>
-<summary>应用内部</summary>
-<br>
+```sh
+swift test
+swift scripts/check-strings.swift
+```
 
-| 文件 | 作用 |
-|:--|:--|
-| `AppDelegate.swift` | 菜单栏、快捷键、放下与收起绳子 |
-| `LinePanel.swift` | 屏幕顶部那条透明的窄条 |
-| `LineView.swift` | 绳子本身，以及每张照片挂在哪里 |
-| `PeggedView.swift` | 一张照片：玻璃相框、夹子、摇摆与微风 |
-| `GrabArea.swift` | 单击、长按、拖放 |
-| `ScreenshotWatcher.swift` | 发现新的截图 |
-| `Inbox.swift` | 接管截图设置，之后再把它们放回去 |
-| `ClipboardWatcher.swift` | 发现复制到剪贴板的图片 |
-| `Markup.swift` | 打开系统「标记」编辑器并保存结果 |
-| `Trim.swift` | 剪辑屏幕录制并保存结果 |
-| `FullScreen.swift` | 判断何时该保持隐藏 |
-| `Line.swift` | 绳上挂着什么，以及你能对它做什么 |
+`scripts/make-dmg.sh` 可生成 DMG，不自动进行公证。
 
-这里出现的每一张图——包括图标——都是由代码绘制的：
-`scripts/make-icon.swift` 与 `scripts/make-readme-art.swift`。
-`scripts/make-dmg.sh` 负责构建发布用的磁盘映像。
+## 作者与许可
 
-翻译文件位于 `Sources/Tendedero/Resources`，每种语言一个 `.lproj` 文件夹。
-`swift scripts/check-strings.swift` 会检查是否有遗漏。
+原作：Alejandro Buján。新增功能与独立记事本图标：sophonil。
 
-</details>
-
-<br>
-
----
-
-<sub>
-1. 首次启动时，Tendedero 会询问是否接管你的截图。如果同意，它会关闭浮动缩略图，并把新截图保存到它自己的文件夹，这两项设置也可以在 Cmd+Shift+5 的「选项」中找到。你原来的设置会被保存，并在退出 Tendedero 或从菜单栏关闭该选项时恢复。当有 App 处于全屏时，Tendedero 会自动隐藏。
-</sub>
-
-<br>
-<br>
-
-<p align="center">
-  <img src="../images/icon.png" width="64" height="64" alt="">
-  <br>
-  <sub>代码采用 MIT 许可。Tendedero 这一名称与图标不在许可范围内，因此 fork 需要自备名称与图标。详见 <a href="../../LICENSE">LICENSE</a>。</sub>
-  <br>
-  <sub>由 <a href="https://alejandrobujan.com">Alejandro Buján</a> 设计与开发。</sub>
-</p>
-
-
-## 复制的文本也能悬挂
-
-在菜单栏打开「悬挂复制的文本」，复制的纯文本就会和截图一起挂在晾衣绳上。它和图片监听是两个独立开关，默认关闭。文本卡片沿用原有玻璃边框、金属夹子和摇摆动画。
-
-- 单击复制完整原文，保留换行、缩进和中文等 Unicode 字符。
-- 长按或用力点按预览全文；双击使用默认文本编辑器打开。
-- 拖入编辑器可插入文本，拖到 Finder 文件夹可保存为 UTF-8 文本文件。
-- 重启后恢复卡片；移除和保留数量遵循原有截图规则，收件目录里的文本移入废纸篓。
-
-文本保存在本机，文件权限仅允许当前用户读写。带私密或临时标记的剪贴板内容、文件复制、本应用自己复制的卡片、空白内容及超过 1 MiB 的文本会跳过。
-
-
-## 固定在最左侧的待办清单
-
-晾衣绳左侧第一个卡片固定为待办清单。点击卡片或在菜单栏选择「打开待办清单」，即可添加、编辑、勾选和删除任务，并在下方「随手记」输入自由备注。输入待办后按回车添加。
-
-任务和备注自动保存在本机，重启后恢复。整组卡片始终居中，随着数量增加向两侧展开；只有待办时，待办位于屏幕中央。截图和文本在待办右侧排列、滚动，待办始终排在第一张；待办不参与剪贴内容的数量限制，也不会被「全部取下」清空。即使没有截图，仍可通过原来的悬停或快捷键唤出待办。晾衣绳保留原有的自动收起行为。
+保留原作者版权声明与 [LICENSE](../../LICENSE)。原项目名称、图标不属于其 MIT 源码授权范围，发布修改版需要独立名称和图标；本版遵守此要求。

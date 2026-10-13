@@ -74,6 +74,35 @@ final class TodoTests: XCTestCase {
         }
     }
 
+    func testNotebookMigrationRunsOnceWithoutOverwritingCurrentNotes() async {
+        await MainActor.run {
+            let oldName = "LegacyNotebookTests.\(UUID().uuidString)"
+            let newName = "NewNotebookTests.\(UUID().uuidString)"
+            let old = UserDefaults(suiteName: oldName)!
+            let new = UserDefaults(suiteName: newName)!
+            defer {
+                old.removePersistentDomain(forName: oldName)
+                new.removePersistentDomain(forName: newName)
+            }
+            let original = TodoStore(defaults: old)
+            original.add("Keep my tasks")
+            original.notes = "My notes"
+            old.set(true, forKey: "inboxEnabled")
+            NotebookMigration.run(defaults: new, legacy: old)
+            XCTAssertEqual(TodoStore(defaults: new).items, original.items)
+            XCTAssertEqual(TodoStore(defaults: new).notes, "My notes")
+            XCTAssertNil(new.object(forKey: "inboxEnabled"))
+            new.removeObject(forKey: "todoNotebook.v1")
+            NotebookMigration.run(defaults: new, legacy: old)
+            XCTAssertTrue(TodoStore(defaults: new).items.isEmpty)
+            new.removeObject(forKey: "importedLegacyNotebook.v1")
+            TodoStore(defaults: new).notes = "Already using LineNote"
+            NotebookMigration.run(defaults: new, legacy: old)
+            XCTAssertEqual(TodoStore(defaults: new).notes, "Already using LineNote")
+            XCTAssertEqual(TodoStore(defaults: old).notes, "My notes")
+        }
+    }
+
     func testEditorCanAcceptKeyboardFocus() async {
         await MainActor.run {
             let suite = "TodoTests.\(UUID().uuidString)"

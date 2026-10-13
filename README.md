@@ -1,192 +1,50 @@
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/images/hero-dark.png">
-  <img src="docs/images/hero-light.png" alt="Tendedero. Screenshots, hung out to dry. Three screenshots in glass frames hang from a thin line under the macOS menu bar.">
-</picture>
+# LineNote
 
-<h3 align="center"><a href="https://tendedero.app/?lang=en">Try it in your browser at tendedero.app&nbsp;&rsaquo;</a></h3>
+A small native macOS shelf for screenshots, copied text, and a notebook that stays within reach.
 
-<p align="center">
-  Free and open source. For macOS 14 and later.
-  <br>
-  <a href="../../releases/latest">Download&nbsp;&rsaquo;</a>
-  &nbsp;&nbsp;
-  <a href="#build-from-source">Build from source&nbsp;&rsaquo;</a>
-  <br><br>
-  English&nbsp;·&nbsp;<a href="docs/i18n/README.es.md">Español</a>&nbsp;·&nbsp;<a href="docs/i18n/README.gl.md">Galego</a>&nbsp;·&nbsp;<a href="docs/i18n/README.fr.md">Français</a>&nbsp;·&nbsp;<a href="docs/i18n/README.pt-BR.md">Português (Brasil)</a>&nbsp;·&nbsp;<a href="docs/i18n/README.ja.md">日本語</a>&nbsp;·&nbsp;<a href="docs/i18n/README.ko.md">한국어</a>&nbsp;·&nbsp;<a href="docs/i18n/README.zh-Hans.md">简体中文</a>&nbsp;·&nbsp;<a href="docs/i18n/README.tr.md">Türkçe</a>&nbsp;·&nbsp;<a href="docs/i18n/README.az.md">Azərbaycanca</a>
-</p>
+LineNote is an independent fork of [Tendedero](https://github.com/alejandrobujan/tendedero) by Alejandro Buján. It is not an official Tendedero release and is not endorsed by its author. The original interaction style and Git history are retained; this fork uses its own name and icon.
 
-<p align="center">
-  <a href="https://trendshift.io/repositories/287033?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-287033" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/287033/daily?language=Swift" alt="alejandrobujan%2Ftendedero | Trendshift" width="250" height="55"/></a>
-  <a href="https://trendshift.io/repositories/287033?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-287033" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/287033/weekly?language=Swift" alt="alejandrobujan%2Ftendedero | Trendshift" width="250" height="55"/></a>
-</p>
+[简体中文](docs/i18n/README.zh-Hans.md) · [Releases](https://github.com/sophonil/linenote/releases)
 
-<br>
+## What is different
 
-## Out of sight. Within reach.
+- **Text clippings:** enable **Hang copied text** to hang plain text alongside screenshots. Click to copy the full text, preserving whitespace and Unicode. Text capture is opt-in, skips private/transient clipboard entries, and ignores blank text or text over 1 MiB.
+- **Pinned notebook:** the first card opens a small window for adding, editing, completing, and deleting tasks, plus free-form notes. Press Return to add a task. Saved tasks and notes return after relaunching.
+- **Centered layout:** the notebook and clippings stay centered as a group and expand toward both edges. With no clippings, the notebook sits in the center. When the row overflows, clippings scroll while the notebook keeps the first slot.
 
-Every screenshot you take hangs on a line just above your screen.
-Rest the pointer in the menu bar and it glides down. Move away and it's gone.
+The original screenshot gestures, glass frames, clips, and automatic hiding remain. **Take everything down** removes screenshot/text cards, leaving the notebook intact. Files in the app's own screenshot directory go to the Trash; files elsewhere are only removed from the line. The menu is disabled when there are no clippings to remove.
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/images/demo-dark.gif">
-  <img src="docs/images/demo-light.gif" alt="The pointer rests against the top edge, the line slides down with three screenshots swinging gently, a click copies one, and the line tucks away when the pointer leaves.">
-</picture>
+## Install and data
 
-<br>
-<br>
+Requires macOS 14 or later. Builds contain both Apple silicon and Intel executables.
 
-## A gesture for everything.
+Quit the earlier app, extract the release ZIP, and drag **LineNote.app** to Applications. Local builds are ad hoc signed unless you provide a Developer ID identity; ad hoc builds are not notarized by Apple.
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/images/bento-dark.png">
-  <img src="docs/images/bento-light.png" alt="Click to copy. Hold to mark up. Drag to share. Let it go.">
-</picture>
+LineNote uses bundle ID `io.github.sophonil.LineNote` and stores captures under `~/Library/Application Support/LineNote/Screenshots`. On its first launch it copies only the saved notebook from the earlier personal Tendedero build, if present. It does not modify the original notebook or import screenshot routing, clipboard settings, or old file paths. Enable capture options again in the menu as needed. Run only one screenshot-handling app at a time.
 
-<br>
-<br>
-
-| | |
-|:--|:--|
-| Click | Copy the image. |
-| Press and hold | Open it in Markup. |
-| Double click | Open it in Preview. |
-| Force click | Take a quick look. |
-| Drag into an app | Send a copy. It stays on the line. |
-| Drag into a folder | Keep it there. It leaves the line. |
-| Drag to the Trash, or click the cross | Let it go. |
-| Rest the pointer in the menu bar | Bring the line down on that screen. |
-| Click anything in the menu bar | Put it away. |
-| <kbd>⌃</kbd>&thinsp;<kbd>⌥</kbd>&thinsp;<kbd>T</kbd> | Show or hide the line. Change it under Shortcut in the menu bar. |
-
-<br>
-
-## Your Desktop. Finally clear.
-
-Hand Tendedero your screenshots<sup>1</sup> and they skip the Desktop
-entirely. No floating thumbnail. No five-second wait. Each capture hangs
-the instant you take it, and only what you drag out is kept.
-
-Screen recordings hang there too, with a play button over them.
-Press and hold one to trim it.
-
-Same shortcuts. Same muscle memory. Just less mess.
-
-<br>
-
-## Copied images too.
-
-Take a screenshot with <kbd>⌃</kbd> held, or copy an image in Preview, and it
-hangs on the line like any other. Turn on Hang copied images in the menu bar
-and the shirt fills in while it is on. Only images: anything copied along
-with text or a file, and anything a password manager marks as private, is
-left alone.
-
-<br>
-
-## Copied text, on the same line.
-
-Turn on **Hang copied text** in the menu bar to hang plain text beside your screenshots. It has its own switch, off by default, independent of **Hang copied images**. Text uses the same glass frame, clothespin and gentle sway.
-
-Click a text card to copy the complete original text, hold to preview it, or double-click to open its UTF-8 text file. Drag into an editor to paste text or into Finder to keep the file. The card only shows a short preview; the saved text keeps its line breaks, spacing and Unicode characters. Text clips restore after quitting, and follow the same retention and Trash behavior as inbox screenshots.
-
-Private, transient, file and self-generated clipboard entries are skipped. Blank text and text over 1 MiB are ignored. Clips are saved locally with owner-only file permissions, without sending content over the network.
-
-## A notebook that stays put.
-
-The leftmost card is a pinned to-do list. Click it (or choose **Open to-do list** in the menu bar) to add, edit, complete or delete tasks, and jot down free-form notes. Press Return to add a task. Tasks and notes save automatically on this Mac and return after relaunching.
-
-The whole group stays centered and expands toward both sides as clippings are added. With no clippings, the notebook sits in the center. It keeps the first slot while screenshots and text clips scroll to its right. It is independent of clipping retention and **Take everything down**. Even with no clippings, the notebook remains available when you reveal the line; the line still tucks away as usual.
-
-## Private by design.
-
-No account. No network. No analytics.
-Tendedero runs entirely on your Mac, and your screenshots never leave it.
-
-<br>
-
-## Tech Specs
-
-| | |
-|:--|:--|
-| **Compatibility** | macOS 14 Sonoma or later, on Apple silicon and Intel. Designed for macOS 27. |
-| **Size** | 1.7 MB |
-| **Languages** | English, Spanish, Galician, French, Portuguese (Brazil), Japanese, Korean, Chinese (Simplified), Turkish, Azerbaijani |
-| **Built with** | Swift, AppKit and SwiftUI |
-| **Network access** | None |
-| **Price** | Free |
-| **License** | MIT for the code. The name and icon are not included. |
-
-<br>
-
-## Install
-
-Download the disk image from the [latest release](../../releases/latest),
-open it and drag Tendedero to Applications. Or install it with Homebrew:
-
-```sh
-brew install --cask alejandrobujan/tap/tendedero
-```
-
-Tendedero is signed with a Developer ID and notarized by Apple, so it opens
-like any other app.
-
-<br>
+No account, analytics, or content upload is added. Text clips are local UTF-8 files created with owner-only permissions. Tasks and notes are saved in local preferences. **Check for Updates…** opens this fork's GitHub releases page in your browser.
 
 ## Build from source
 
 ```sh
-git clone git@github.com:alejandrobujan/tendedero.git
-cd tendedero
+git clone https://github.com/sophonil/linenote.git
+cd linenote
+git switch feature/customizations
 scripts/build-app.sh
-open build/Tendedero.app
+open build/LineNote.app
 ```
 
-Requires the Swift toolchain. Xcode is optional. With the Command Line Tools for macOS 27, the script falls back to the macOS 26 SDK they install alongside, because the new SDK needs a SwiftUI macro plugin only Xcode includes. Local builds are signed ad hoc,
-so macOS asks again for access to the Desktop after each rebuild.
+Requires the Swift toolchain. The internal Swift module and source directory retain the upstream `Tendedero` name to keep code comparisons straightforward. The build script can fall back to an installed macOS 26 SDK if the newer Command Line Tools SDK cannot compile SwiftUI.
 
-<details>
-<summary>Inside the app</summary>
-<br>
+```sh
+swift test
+swift scripts/check-strings.swift
+```
 
-| File | Role |
-|:--|:--|
-| `AppDelegate.swift` | Menu bar, shortcut, revealing and tucking away the line |
-| `LinePanel.swift` | The transparent strip along the top of the screen |
-| `LineView.swift` | The line and where each photo hangs |
-| `PeggedView.swift` | One photo: glass frame, clip, swing and breeze |
-| `GrabArea.swift` | Click, long press, drag and drop |
-| `ScreenshotWatcher.swift` | Notices new screenshots |
-| `ClipboardWatcher.swift` | Notices images copied to the clipboard |
-| `Inbox.swift` | Takes over screenshot settings and puts them back |
-| `Markup.swift` | Opens the system Markup editor and saves the result |
-| `Trim.swift` | Trims a screen recording and saves the result |
-| `FullScreen.swift` | Knows when to stay hidden |
-| `Line.swift` | What is hanging, and what you can do with it |
+For a disk image, run `scripts/make-dmg.sh`. The resulting image is not automatically notarized. For a ZIP, use `ditto -c -k --sequesterRsrc --keepParent build/LineNote.app build/LineNote-0.1.0.zip`.
 
-Every image here, the icon included, is drawn in code by
-`scripts/make-icon.swift` and `scripts/make-readme-art.swift`.
-`scripts/make-dmg.sh` builds the disk image for releases.
+## Credits and license
 
-Translations live in `Sources/Tendedero/Resources`, one `.lproj` folder per
-language. `swift scripts/check-strings.swift` checks that none is missing.
+Original application: **Alejandro Buján**, [alejandrobujan/tendedero](https://github.com/alejandrobujan/tendedero). Fork additions and new notebook icon: **sophonil**.
 
-</details>
-
-<br>
-
----
-
-<sub>
-1. On first launch, Tendedero offers to handle your screenshots. If you accept, it turns off the floating thumbnail and saves new screenshots to its own folder, two settings also found under Options in Cmd+Shift+5. Your previous settings are saved and restored when Tendedero quits or the option is turned off from the menu bar. Tendedero hides automatically while an app is in full screen.
-</sub>
-
-<br>
-<br>
-
-<p align="center">
-  <img src="docs/images/icon.png" width="64" height="64" alt="">
-  <br>
-  <sub>The code is MIT licensed. The Tendedero name and icon are not, so forks need their own. See <a href="LICENSE">LICENSE</a>.</sub>
-  <br>
-  <sub>Designed and built by <a href="https://alejandrobujan.com">Alejandro Buján</a>.</sub>
-</p>
+The original copyright and [LICENSE](LICENSE) are preserved. The upstream Tendedero name and icon are not covered by its MIT source license; LineNote uses a different name and original icon artwork. Other translated upstream documents and artwork in the Git history describe the original project, not this fork's releases.

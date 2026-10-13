@@ -1,8 +1,8 @@
 /* Turkish. */
 
 /* AppDelegate */
-"Let Tendedero handle your screenshots?" = "Ekran görüntülerini Tendedero yönetsin mi?";
-"Screenshots will hang on the line the instant you take them, without the floating thumbnail, and will not pile up on your Desktop. Drag one to a folder to keep it, or discard it with the cross. You can turn this off from the menu bar, and your settings come back when Tendedero quits." = "Ekran görüntüleri, kayan küçük resim olmadan anında ipin üzerine asılacak ve Masaüstünüzde birikmeyecek. Saklamak için bir klasöre sürükleyin ya da çarpı ile silin. Bunu menü çubuğundan kapatabilirsiniz; Tendedero kapandığında ayarlarınız geri gelir.";
+"Let LineNote handle your screenshots?" = "Ekran görüntülerini LineNote yönetsin mi?";
+"Screenshots will hang on the line the instant you take them, without the floating thumbnail, and will not pile up on your Desktop. Drag one to a folder to keep it, or discard it with the cross. You can turn this off from the menu bar, and your settings come back when LineNote quits." = "Ekran görüntüleri, kayan küçük resim olmadan anında ipin üzerine asılacak ve Masaüstünüzde birikmeyecek. Saklamak için bir klasöre sürükleyin ya da çarpı ile silin. Bunu menü çubuğundan kapatabilirsiniz; LineNote kapandığında ayarlarınız geri gelir.";
 "Turn on" = "Etkinleştir";
 "Not now" = "Şimdi değil";
 "Hide line" = "İpi gizle";
@@ -14,9 +14,9 @@
 "Sounds" = "Sesler";
 "Open at login" = "Başlangıçta aç";
 "Check for Updates…" = "Güncellemeleri denetle…";
-"Quit Tendedero" = "Tendedero'yu kapat";
+"Quit LineNote" = "LineNote'yu kapat";
 "Could not change the login setting" = "Giriş ayarı değiştirilemedi";
-"Move Tendedero to the Applications folder and try again." = "Tendedero'yu Uygulamalar klasörüne taşıyın ve tekrar deneyin.";
+"Move LineNote to the Applications folder and try again." = "LineNote'yu Uygulamalar klasörüne taşıyın ve tekrar deneyin.";
 "Keep on line" = "İpte tut";
 "As many as fit" = "Sığdığı kadar";
 "%d items" = "%d öğe";
@@ -42,7 +42,7 @@
 "Over full screen apps" = "Tam ekran uygulamaların üzerinde";
 "Hang copied images" = "Kopyalanan görselleri as";
 "Images you copy hang on the line too" = "Kopyaladığınız görseller de ipe asılır";
-"Tendedero, hanging copied images" = "Tendedero, kopyalanan görselleri asıyor";
+"LineNote, hanging copied images" = "LineNote, kopyalanan görselleri asıyor";
 
 /* GrabArea */
 "Copy" = "Kopyala";
@@ -58,7 +58,6 @@
 "Take down everything to the right" = "Sağdakilerin hepsini indir";
 
 /* LineView */
-"Take a screenshot and it will hang here" = "Bir ekran görüntüsü al, buraya asılacak";
 
 /* PeggedView */
 "Copied" = "Kopyalandı";
@@ -66,7 +65,7 @@
 /* Text clippings */
 "Hang copied text" = "Kopyalanan metni as";
 "Text you copy hangs on the line too" = "Kopyaladığınız metin de ipe asılır";
-"Tendedero, hanging copied text" = "Tendedero, kopyalanan metni asıyor";
+"LineNote, hanging copied text" = "LineNote, kopyalanan metni asıyor";
 "Click to copy text. Hold to preview." = "Metni kopyalamak için tıklayın. Önizlemek için basılı tutun.";
 
 /* Pinned notebook */
