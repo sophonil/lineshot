@@ -19,7 +19,7 @@
 "Move Tendedero to the Applications folder and try again." = "请先把 Tendedero 移到「应用程序」文件夹，再试一次。";
 "Keep on line" = "绳上保留";
 "As many as fit" = "放得下的数量";
-"%d photos" = "%d 张";
+"%d items" = "%d 项";
 "Also watch folders" = "同时监视文件夹";
 "Add Folder…" = "添加文件夹…";
 "Stop Watching" = "停止监视";
@@ -62,3 +62,25 @@
 
 /* PeggedView */
 "Copied" = "已复制";
+
+/* Text clippings */
+"Hang copied text" = "悬挂复制的文本";
+"Text you copy hangs on the line too" = "复制的文本也会挂在晾衣绳上";
+"Tendedero, hanging copied text" = "Tendedero，正在悬挂复制的文本";
+"Click to copy text. Hold to preview." = "单击复制文本，长按预览全文。";
+
+/* Pinned notebook */
+"To-do list" = "待办清单";
+"Click to add a to-do" = "点击添加待办";
+"All done" = "全部完成";
+"Open to-do list" = "打开待办清单";
+"%d remaining" = "剩余 %d 项";
+"Add a to-do…" = "添加一项待办…";
+"Add to-do" = "添加待办";
+"One small thing at a time." = "一件一件，慢慢完成。";
+"Mark incomplete" = "标记为未完成";
+"Mark complete" = "标记为已完成";
+"To-do" = "待办事项";
+"Delete to-do" = "删除待办";
+"Notes" = "随手记";
+"Clear completed" = "清除已完成";

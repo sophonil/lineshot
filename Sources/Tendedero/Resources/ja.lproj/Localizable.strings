@@ -19,7 +19,7 @@
 "Move Tendedero to the Applications folder and try again." = "Tendederoを「アプリケーション」フォルダに移動してから、もう一度お試しください。";
 "Keep on line" = "ロープに残す数";
 "As many as fit" = "収まるだけ";
-"%d photos" = "%d枚";
+"%d items" = "%d 件";
 "Also watch folders" = "フォルダも監視";
 "Add Folder…" = "フォルダを追加…";
 "Stop Watching" = "監視を停止";
@@ -62,3 +62,25 @@
 
 /* PeggedView */
 "Copied" = "コピーしました";
+
+/* Text clippings */
+"Hang copied text" = "コピーしたテキストを吊るす";
+"Text you copy hangs on the line too" = "コピーしたテキストもロープに吊るします";
+"Tendedero, hanging copied text" = "Tendedero、コピーしたテキストを表示中";
+"Click to copy text. Hold to preview." = "クリックでテキストをコピー。長押しでプレビュー。";
+
+/* Pinned notebook */
+"To-do list" = "やることリスト";
+"Click to add a to-do" = "クリックしてタスクを追加";
+"All done" = "すべて完了";
+"Open to-do list" = "やることリストを開く";
+"%d remaining" = "残り %d 件";
+"Add a to-do…" = "タスクを追加…";
+"Add to-do" = "タスクを追加";
+"One small thing at a time." = "小さなことから、一つずつ。";
+"Mark incomplete" = "未完了にする";
+"Mark complete" = "完了にする";
+"To-do" = "タスク";
+"Delete to-do" = "タスクを削除";
+"Notes" = "メモ";
+"Clear completed" = "完了済みを消去";

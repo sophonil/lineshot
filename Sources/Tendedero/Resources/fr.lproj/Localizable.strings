@@ -19,7 +19,7 @@
 "Move Tendedero to the Applications folder and try again." = "Placez Tendedero dans le dossier Applications, puis réessayez.";
 "Keep on line" = "Garder sur la corde";
 "As many as fit" = "Autant qu’il en tient";
-"%d photos" = "%d photos";
+"%d items" = "%d éléments";
 "Also watch folders" = "Surveiller aussi des dossiers";
 "Add Folder…" = "Ajouter un dossier…";
 "Stop Watching" = "Ne plus surveiller";
@@ -62,3 +62,25 @@
 
 /* PeggedView */
 "Copied" = "Copié";
+
+/* Text clippings */
+"Hang copied text" = "Accrocher le texte copié";
+"Text you copy hangs on the line too" = "Le texte copié est aussi accroché au fil";
+"Tendedero, hanging copied text" = "Tendedero, texte copié accroché";
+"Click to copy text. Hold to preview." = "Cliquez pour copier le texte. Maintenez pour afficher un aperçu.";
+
+/* Pinned notebook */
+"To-do list" = "À faire";
+"Click to add a to-do" = "Cliquez pour ajouter une tâche";
+"All done" = "Tout est fait";
+"Open to-do list" = "Ouvrir les tâches";
+"%d remaining" = "%d restantes";
+"Add a to-do…" = "Ajouter une tâche…";
+"Add to-do" = "Ajouter une tâche";
+"One small thing at a time." = "Une petite chose à la fois.";
+"Mark incomplete" = "Marquer comme non terminée";
+"Mark complete" = "Marquer comme terminée";
+"To-do" = "Tâche";
+"Delete to-do" = "Supprimer la tâche";
+"Notes" = "Notes";
+"Clear completed" = "Effacer les tâches terminées";

@@ -21,7 +21,7 @@
 "Move Tendedero to the Applications folder and try again." = "Move Tendedero to the Applications folder and try again.";
 "Keep on line" = "Keep on line";
 "As many as fit" = "As many as fit";
-"%d photos" = "%d photos";
+"%d items" = "%d items";
 "Also watch folders" = "Also watch folders";
 "Add Folder…" = "Add Folder…";
 "Stop Watching" = "Stop Watching";
@@ -64,3 +64,25 @@
 
 /* PeggedView */
 "Copied" = "Copied";
+
+/* Text clippings */
+"Hang copied text" = "Hang copied text";
+"Text you copy hangs on the line too" = "Text you copy hangs on the line too";
+"Tendedero, hanging copied text" = "Tendedero, hanging copied text";
+"Click to copy text. Hold to preview." = "Click to copy text. Hold to preview.";
+
+/* Pinned notebook */
+"To-do list" = "To-do list";
+"Click to add a to-do" = "Click to add a to-do";
+"All done" = "All done";
+"Open to-do list" = "Open to-do list";
+"%d remaining" = "%d remaining";
+"Add a to-do…" = "Add a to-do…";
+"Add to-do" = "Add to-do";
+"One small thing at a time." = "One small thing at a time.";
+"Mark incomplete" = "Mark incomplete";
+"Mark complete" = "Mark complete";
+"To-do" = "To-do";
+"Delete to-do" = "Delete to-do";
+"Notes" = "Notes";
+"Clear completed" = "Clear completed";

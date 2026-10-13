@@ -8,6 +8,8 @@ import SwiftUI
 @MainActor
 final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private let line = Line()
+    private let todos = TodoStore()
+    private var todoEditor: TodoEditor?
     private var panel: LinePanel!
     private var statusItem: NSStatusItem!
     private var watcher: ScreenshotWatcher!
@@ -42,9 +44,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private var awaySince: Date?
     /// Whether the line should be up, if nothing prevents it. A full screen
     /// app on that screen does: the line waits until you leave full screen.
-    private var wanted = false
-    /// Set when you open the line on purpose, so it stays up while empty.
-    private var keepOpen = false
+    private var wanted = true
 
     // What brings the line down, from the menu bar's "Bring the line down".
     // Out of the box, the first two are on and the third off.
@@ -64,7 +64,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
-        let host = NSHostingView(rootView: LineView(line: line))
+        let host = NSHostingView(rootView: LineView(line: line, todos: todos, onOpenTodos: { [weak self] in
+            self?.showTodos()
+        }))
         host.sizingOptions = []
         panel = LinePanel(content: host)
         panel.placeOnScreen()
@@ -74,7 +76,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         restoreSettingsOnTermination()
         startWatcher()
         clipboardWatcher = ClipboardWatcher { [weak self] url in self?.hangCapture(url) }
-        if ClipboardWatcher.isEnabled { clipboardWatcher.start() }
+        if ClipboardWatcher.isWatching { clipboardWatcher.start() }
 
         registerShortcut()
 
@@ -125,15 +127,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
         if !UserDefaults.standard.bool(forKey: "welcomed") {
             UserDefaults.standard.set(true, forKey: "welcomed")
-            keepOpen = true
             wanted = true
             refresh()
             reveal(pinned: true)
             DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak self] in
                 guard let self, self.line.liveCount == 0 else { return }
-                self.keepOpen = false
-                self.wanted = false
-                self.refresh()
+                self.setRevealed(false)
             }
         }
     }
@@ -232,8 +231,18 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     /// Watching the clipboard is opt in, from the menu bar only.
     private func setClipboard(_ on: Bool) {
         ClipboardWatcher.isEnabled = on
-        if on { clipboardWatcher.start() } else { clipboardWatcher.stop() }
+        updateClipboardWatching()
         updateStatusIcon()
+    }
+
+    private func setClipboardText(_ on: Bool) {
+        ClipboardWatcher.isTextEnabled = on
+        updateClipboardWatching()
+        updateStatusIcon()
+    }
+
+    private func updateClipboardWatching() {
+        if ClipboardWatcher.isWatching { clipboardWatcher.start() } else { clipboardWatcher.stop() }
     }
 
     /// Quitting from the menu or logging out runs applicationWillTerminate.
@@ -253,14 +262,15 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
     // MARK: Showing and hiding
 
-    /// An empty line goes away, unless it was opened on purpose.
+    /// The notebook keeps the line available even with no clippings.
     private func itemsChanged() {
-        guard line.liveCount == 0, !keepOpen else { return }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) { [weak self] in
-            guard let self, self.line.liveCount == 0, !self.keepOpen else { return }
-            self.wanted = false
-            self.refresh()
-        }
+        wanted = true
+        refresh()
+    }
+
+    private func showTodos() {
+        if todoEditor == nil { todoEditor = TodoEditor(store: todos) }
+        todoEditor?.show(on: panel.screen, clippingCount: line.items.count, visibleCount: line.visibleCount)
     }
 
     /// The line comes down on that screen for a moment, then tucks away.
@@ -409,13 +419,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     @objc private func toggle() {
         if isRevealed {
             setRevealed(false)
-            if line.liveCount == 0 {
-                keepOpen = false
-                wanted = false
-                refresh()
-            }
         } else {
-            keepOpen = true
             wanted = true
             panel.placeOnScreen()
             updateCapacity()
@@ -538,11 +542,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         guard !GrabView.isDragging else { return }
         let local = panel.convertPoint(fromScreen: mouse)
         let flipped = CGPoint(x: local.x, y: panel.frame.height - local.y)
-        var overPhoto = line.hitRects.values.contains { $0.insetBy(dx: -4, dy: -4).contains(flipped) }
+        var overPhoto = line.hitRects.contains { id, rect in
+            if id != TodoCardView.hitID && flipped.x < Layout.clippingsStart(count: line.items.count, width: panel.frame.width, visible: line.visibleCount) { return false }
+            return rect.insetBy(dx: -4, dy: -4).contains(flipped)
+        }
         // A line longer than the screen also takes the band the photos hang
         // in, gaps included, so a swipe anywhere along it moves it.
-        if !overPhoto, line.items.count > line.visibleCount, Line.keepOnLine != nil {
-            let band = line.hitRects.values.reduce(CGRect.null) { $0.union($1) }
+        if !overPhoto, line.items.count > line.visibleCount, flipped.x >= Layout.clippingsStart(count: line.items.count, width: panel.frame.width, visible: line.visibleCount) {
+            let band = line.hitRects.filter { $0.key != TodoCardView.hitID }.values.reduce(CGRect.null) { $0.union($1) }
             overPhoto = !band.isNull && flipped.y >= band.minY - 4 && flipped.y <= band.maxY + 4
         }
         if panel.ignoresMouseEvents == overPhoto {
@@ -594,10 +601,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
 
     private func updateCapacity() {
-        let usable = panel.frame.width - 200
-        let fits = max(3, min(12, Int(usable / Layout.spacing)))
+        let fits = Layout.clippingCapacity(width: panel.frame.width)
         line.visibleCount = fits
         line.maxItems = max(fits, Line.keepOnLine ?? fits)
+        line.scroll = min(line.scroll, CGFloat(max(0, line.items.count - fits)) * Layout.spacing)
     }
 
     // MARK: Menu bar
@@ -613,11 +620,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         statusItem.menu = menu
     }
 
-    /// The shirt fills in while copied images are hung, so it shows at a
+    /// The shirt fills in while either clipboard mode is on, so it shows at a
     /// glance that the clipboard is being watched.
     private func updateStatusIcon() {
-        let on = ClipboardWatcher.isEnabled
-        let description = on ? L("Tendedero, hanging copied images") : "Tendedero"
+        let on = ClipboardWatcher.isWatching
+        let description = ClipboardWatcher.isTextEnabled
+            ? L("Tendedero, hanging copied text")
+            : (on ? L("Tendedero, hanging copied images") : "Tendedero")
         let image = NSImage(systemSymbolName: on ? "tshirt.fill" : "tshirt", accessibilityDescription: description)
         image?.isTemplate = true
         statusItem.button?.image = image
@@ -635,6 +644,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             toggleItem.keyEquivalentModifierMask = shortcut.modifiers
         }
         menu.addItem(toggleItem)
+        menu.addItem(ClosureMenuItem(L("Open to-do list")) { [weak self] in self?.showTodos() })
 
         let clearItem = ClosureMenuItem(L("Take everything down")) { [weak self] in
             self?.line.clear()
@@ -655,6 +665,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         clipboard.state = ClipboardWatcher.isEnabled ? .on : .off
         clipboard.toolTip = L("Images you copy hang on the line too")
         menu.addItem(clipboard)
+
+        let clipboardText = ClosureMenuItem(L("Hang copied text")) { [weak self] in
+            self?.setClipboardText(!ClipboardWatcher.isTextEnabled)
+        }
+        clipboardText.state = ClipboardWatcher.isTextEnabled ? .on : .off
+        clipboardText.toolTip = L("Text you copy hangs on the line too")
+        menu.addItem(clipboardText)
 
         let bringDown = NSMenuItem(title: L("Bring the line down"), action: nil, keyEquivalent: "")
         let options = NSMenu()
@@ -713,7 +730,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         fit.state = Line.keepOnLine == nil ? .on : .off
         keeps.addItem(fit)
         for n in Line.keepChoices {
-            let item = ClosureMenuItem(String(format: L("%d photos"), n)) { [weak self] in self?.setKeep(n) }
+            let item = ClosureMenuItem(String(format: L("%d items"), n)) { [weak self] in self?.setKeep(n) }
             item.state = Line.keepOnLine == n ? .on : .off
             keeps.addItem(item)
         }

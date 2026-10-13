@@ -28,7 +28,10 @@ struct GrabArea: NSViewRepresentable {
         let id = item.id
         let line = line
         let isRecording = item.isRecording
+        let isText = item.isText
         view.url = item.url
+        view.isText = isText
+        view.toolTip = isText ? L("Click to copy text. Hold to preview.") : nil
         view.dragImage = item.thumb
         view.onClick = { line.copy(id) }
         view.onDoubleClick = { line.open(id) }
@@ -50,7 +53,7 @@ struct GrabArea: NSViewRepresentable {
             menu.addItem(ClosureMenuItem(L("Copy")) { line.copy(id) })
             menu.addItem(ClosureMenuItem(L("Open")) { line.open(id) })
             menu.addItem(ClosureMenuItem(L("Quick Look")) { line.quickLook(id) })
-            if !isRecording {
+            if !isRecording && !isText {
                 menu.addItem(ClosureMenuItem(L("Markup")) { line.markup(id) })
             }
             menu.addItem(ClosureMenuItem(L("Show in Finder")) { line.reveal(id) })
@@ -82,6 +85,7 @@ final class GrabView: NSView, NSDraggingSource {
     static var isShowingMenu = false
 
     var url: URL?
+    var isText = false
     var dragImage: NSImage?
     var onClick: () -> Void = {}
     var onDoubleClick: () -> Void = {}
@@ -164,7 +168,17 @@ final class GrabView: NSView, NSDraggingSource {
         startedDrag = true
         endPress()
 
-        let item = NSDraggingItem(pasteboardWriter: url as NSURL)
+        let writer: NSPasteboardWriting
+        if isText {
+            guard let entry = TextClipping.pasteboardItem(for: url, includeFile: true) else {
+                startedDrag = false
+                return
+            }
+            writer = entry
+        } else {
+            writer = url as NSURL
+        }
+        let item = NSDraggingItem(pasteboardWriter: writer)
         item.setDraggingFrame(imageFrame(), contents: dragImage)
         let session = beginDraggingSession(with: [item], event: event, source: self)
         // Released where nothing accepts it: it flies back to the line.

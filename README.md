@@ -83,6 +83,20 @@ left alone.
 
 <br>
 
+## Copied text, on the same line.
+
+Turn on **Hang copied text** in the menu bar to hang plain text beside your screenshots. It has its own switch, off by default, independent of **Hang copied images**. Text uses the same glass frame, clothespin and gentle sway.
+
+Click a text card to copy the complete original text, hold to preview it, or double-click to open its UTF-8 text file. Drag into an editor to paste text or into Finder to keep the file. The card only shows a short preview; the saved text keeps its line breaks, spacing and Unicode characters. Text clips restore after quitting, and follow the same retention and Trash behavior as inbox screenshots.
+
+Private, transient, file and self-generated clipboard entries are skipped. Blank text and text over 1 MiB are ignored. Clips are saved locally with owner-only file permissions, without sending content over the network.
+
+## A notebook that stays put.
+
+The leftmost card is a pinned to-do list. Click it (or choose **Open to-do list** in the menu bar) to add, edit, complete or delete tasks, and jot down free-form notes. Press Return to add a task. Tasks and notes save automatically on this Mac and return after relaunching.
+
+The whole group stays centered and expands toward both sides as clippings are added. With no clippings, the notebook sits in the center. It keeps the first slot while screenshots and text clips scroll to its right. It is independent of clipping retention and **Take everything down**. Even with no clippings, the notebook remains available when you reveal the line; the line still tucks away as usual.
+
 ## Private by design.
 
 No account. No network. No analytics.

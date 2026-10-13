@@ -37,24 +37,35 @@ enum Layout {
         return ropeTop + 4 * sag(width: width) * f * (1 - f)
     }
 
-    /// Photos hang `spacing` apart, centred. When there are more than the
-    /// `visible` that fit: with Keep on line set, they keep their spacing,
-    /// the newest stays where the last one would hang on a full line, and
-    /// `scroll` brings older ones in from the left. Otherwise (a line hung
-    /// on a wider screen) they move closer together so none is past the edge.
-    static func x(index: Int, count: Int, width: CGFloat, visible: Int, scroll: CGFloat) -> CGFloat {
-        if Line.keepOnLine != nil && count > visible {
-            let newest = width / 2 + CGFloat(visible - 1) * spacing / 2
-            return newest - CGFloat(count - 1 - index) * spacing + scroll
-        }
-        let gaps = CGFloat(max(count - 1, 0))
-        let step = gaps > 0 ? min(spacing, max(0, width - 200) / gaps) : spacing
-        return width / 2 - gaps * step / 2 + CGFloat(index) * step
+    /// Center the notebook and the visible clippings as one group. The
+    /// notebook keeps the first slot when older clippings are scrolled in.
+    static func todoX(count: Int, width: CGFloat, visible: Int) -> CGFloat {
+        let shown = min(max(0, count), max(1, visible))
+        return width / 2 - CGFloat(shown) * spacing / 2
     }
+
+    static func clippingsStart(count: Int, width: CGFloat, visible: Int) -> CGFloat {
+        todoX(count: count, width: width, visible: visible) + spacing / 2
+    }
+
+    static func clippingCapacity(width: CGFloat) -> Int {
+        // Leave a 24-point margin at either edge, including the notebook.
+        max(1, min(12, Int(max(0, width - 48 - cardWidth) / spacing)))
+    }
+
+    static func x(index: Int, count: Int, width: CGFloat, visible: Int, scroll: CGFloat) -> CGFloat {
+        let overflow = max(0, count - max(1, visible))
+        let offset = min(max(0, scroll), CGFloat(overflow) * spacing)
+        return todoX(count: count, width: width, visible: visible)
+            + CGFloat(index - overflow + 1) * spacing + offset
+    }
+
 }
 
 struct LineView: View {
     @ObservedObject var line: Line
+    @ObservedObject var todos: TodoStore
+    var onOpenTodos: () -> Void = {}
 
     var body: some View {
         GeometryReader { geo in
@@ -62,22 +73,30 @@ struct LineView: View {
             ZStack(alignment: .topLeading) {
                 Rope(width: width)
 
-                if line.items.isEmpty {
-                    Hint()
-                        .position(x: width / 2, y: Layout.ropeY(x: width / 2, width: width) + 34)
-                        .transition(.opacity)
+                ZStack(alignment: .topLeading) {
+                    ForEach(Array(line.items.enumerated()), id: \.element.id) { index, item in
+                        let x = Layout.x(index: index, count: line.items.count, width: width,
+                                         visible: line.visibleCount, scroll: line.scroll)
+                        let ropeY = Layout.ropeY(x: x, width: width)
+                        PeggedView(item: item, line: line)
+                            .frame(width: Layout.cardWidth, height: Layout.panelHeight - ropeY, alignment: .top)
+                            // Photos scrolled towards an edge fade out before they reach it.
+                            .opacity(min(1, max(0, min(x, width - x) / 90)))
+                            .position(x: x, y: ropeY - Layout.pinAbove + (Layout.panelHeight - ropeY) / 2)
+                    }
+                }
+                .frame(width: width, height: geo.size.height, alignment: .topLeading)
+                .mask(alignment: .topLeading) {
+                    Rectangle()
+                        .frame(width: max(0, width - Layout.clippingsStart(count: line.items.count, width: width, visible: line.visibleCount)), height: geo.size.height)
+                        .offset(x: Layout.clippingsStart(count: line.items.count, width: width, visible: line.visibleCount))
                 }
 
-                ForEach(Array(line.items.enumerated()), id: \.element.id) { index, item in
-                    let x = Layout.x(index: index, count: line.items.count, width: width,
-                                     visible: line.visibleCount, scroll: line.scroll)
-                    let ropeY = Layout.ropeY(x: x, width: width)
-                    PeggedView(item: item, line: line)
-                        .frame(width: Layout.cardWidth, height: Layout.panelHeight - ropeY, alignment: .top)
-                        // Photos scrolled towards an edge fade out before they reach it.
-                        .opacity(min(1, max(0, min(x, width - x) / 90)))
-                        .position(x: x, y: ropeY - Layout.pinAbove + (Layout.panelHeight - ropeY) / 2)
-                }
+                let todoX = Layout.todoX(count: line.items.count, width: width, visible: line.visibleCount)
+                let todoY = Layout.ropeY(x: todoX, width: width)
+                TodoCardView(store: todos, gust: line.gust, onOpen: onOpenTodos)
+                    .frame(width: Layout.cardWidth, height: Layout.panelHeight - todoY, alignment: .top)
+                    .position(x: todoX, y: todoY - Layout.pinAbove + (Layout.panelHeight - todoY) / 2)
             }
             .animation(.spring(response: 0.55, dampingFraction: 0.78), value: line.items.map(\.id))
             .animation(.easeInOut(duration: 0.3), value: line.items.isEmpty)
@@ -90,17 +109,6 @@ struct LineView: View {
         .onPreferenceChange(HitRectsKey.self) { rects in
             line.hitRects = rects
         }
-    }
-}
-
-private struct Hint: View {
-    var body: some View {
-        Text(L("Take a screenshot and it will hang here"))
-            .font(.system(size: 12, weight: .medium, design: .rounded))
-            .foregroundStyle(.secondary)
-            .padding(.horizontal, 12)
-            .padding(.vertical, 6)
-            .background(.regularMaterial, in: Capsule())
     }
 }
 

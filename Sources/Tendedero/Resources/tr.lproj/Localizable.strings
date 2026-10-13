@@ -19,7 +19,7 @@
 "Move Tendedero to the Applications folder and try again." = "Tendedero'yu Uygulamalar klasörüne taşıyın ve tekrar deneyin.";
 "Keep on line" = "İpte tut";
 "As many as fit" = "Sığdığı kadar";
-"%d photos" = "%d fotoğraf";
+"%d items" = "%d öğe";
 "Also watch folders" = "Klasörleri de izle";
 "Add Folder…" = "Klasör ekle…";
 "Stop Watching" = "İzlemeyi durdur";
@@ -62,3 +62,25 @@
 
 /* PeggedView */
 "Copied" = "Kopyalandı";
+
+/* Text clippings */
+"Hang copied text" = "Kopyalanan metni as";
+"Text you copy hangs on the line too" = "Kopyaladığınız metin de ipe asılır";
+"Tendedero, hanging copied text" = "Tendedero, kopyalanan metni asıyor";
+"Click to copy text. Hold to preview." = "Metni kopyalamak için tıklayın. Önizlemek için basılı tutun.";
+
+/* Pinned notebook */
+"To-do list" = "Yapılacaklar";
+"Click to add a to-do" = "Görev eklemek için tıklayın";
+"All done" = "Hepsi tamamlandı";
+"Open to-do list" = "Yapılacakları aç";
+"%d remaining" = "%d kaldı";
+"Add a to-do…" = "Görev ekle…";
+"Add to-do" = "Görev ekle";
+"One small thing at a time." = "Her seferinde küçük bir iş.";
+"Mark incomplete" = "Tamamlanmadı olarak işaretle";
+"Mark complete" = "Tamamlandı olarak işaretle";
+"To-do" = "Görev";
+"Delete to-do" = "Görevi sil";
+"Notes" = "Notlar";
+"Clear completed" = "Tamamlananları temizle";
