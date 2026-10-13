@@ -1,6 +1,6 @@
 # Lineshot
 
-**Local preview — not published.** The current icon is a placeholder and will be replaced with the owner-provided artwork before release.
+<img src="Assets/Lineshot.png" width="128" alt="Lineshot app icon">
 
 A small native macOS shelf for screenshots, copied text, and a notebook that stays within reach.
 
@@ -47,6 +47,6 @@ For a disk image, run `scripts/make-dmg.sh`. The resulting image is not automati
 
 ## Credits and license
 
-Original application: **Alejandro Buján**, [alejandrobujan/tendedero](https://github.com/alejandrobujan/tendedero). Fork additions and new notebook icon: **sophonil**.
+Original application: **Alejandro Buján**, [alejandrobujan/tendedero](https://github.com/alejandrobujan/tendedero). Fork additions and supplied app icon: **sophonil**.
 
 The original copyright and [LICENSE](LICENSE) are preserved. The upstream Tendedero name and icon are not covered by its MIT source license; Lineshot uses a different name and original icon artwork. Other translated upstream documents and artwork in the Git history describe the original project, not this fork's releases.

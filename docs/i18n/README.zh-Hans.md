@@ -1,6 +1,6 @@
 # Lineshot
 
-**本地预览版，尚未发布。** 当前图标为占位，收到正式图标后再发布。
+<img src="../../Assets/Lineshot.png" width="128" alt="Lineshot 应用图标">
 
 把截图、复制的文本和待办记事本挂在屏幕顶部，随用随取。
 
@@ -47,6 +47,6 @@ swift scripts/check-strings.swift
 
 ## 作者与许可
 
-原作：Alejandro Buján。新增功能与独立记事本图标：sophonil。
+原作：Alejandro Buján。新增功能与应用图标：sophonil。
 
 保留原作者版权声明与 [LICENSE](../../LICENSE)。原项目名称、图标不属于其 MIT 源码授权范围，发布修改版需要独立名称和图标；本版遵守此要求。

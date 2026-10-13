@@ -38,7 +38,7 @@ cp "$BIN" "$APP/Contents/MacOS/Lineshot"
 
 # Icon
 WORK="$(mktemp -d)"
-swift scripts/make-icon.swift "$WORK/icon.png"
+cp Assets/Lineshot.png "$WORK/icon.png"
 ICONSET="$WORK/Lineshot.iconset"
 mkdir -p "$ICONSET"
 for s in 16 32 128 256 512; do
