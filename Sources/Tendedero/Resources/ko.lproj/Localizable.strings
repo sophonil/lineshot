@@ -1,8 +1,8 @@
 /* Korean. */
 
 /* AppDelegate */
-"Let LineNote handle your screenshots?" = "LineNote가 스크린샷을 관리하도록 할까요?";
-"Screenshots will hang on the line the instant you take them, without the floating thumbnail, and will not pile up on your Desktop. Drag one to a folder to keep it, or discard it with the cross. You can turn this off from the menu bar, and your settings come back when LineNote quits." = "스크린샷을 찍는 즉시 플로팅 썸네일 없이 빨랫줄에 걸리고, 데스크탑에 쌓이지 않아요. 보관하려면 폴더로 드래그하고, 버리려면 X 버튼을 클릭하세요. 메뉴 막대에서 언제든 끌 수 있고, LineNote를 종료하면 원래 설정으로 돌아가요.";
+"Let Lineshot handle your screenshots?" = "Lineshot가 스크린샷을 관리하도록 할까요?";
+"Screenshots will hang on the line the instant you take them, without the floating thumbnail, and will not pile up on your Desktop. Drag one to a folder to keep it, or discard it with the cross. You can turn this off from the menu bar, and your settings come back when Lineshot quits." = "스크린샷을 찍는 즉시 플로팅 썸네일 없이 빨랫줄에 걸리고, 데스크탑에 쌓이지 않아요. 보관하려면 폴더로 드래그하고, 버리려면 X 버튼을 클릭하세요. 메뉴 막대에서 언제든 끌 수 있고, Lineshot를 종료하면 원래 설정으로 돌아가요.";
 "Turn on" = "켜기";
 "Not now" = "나중에";
 "Hide line" = "빨랫줄 가리기";
@@ -14,9 +14,9 @@
 "Sounds" = "사운드";
 "Open at login" = "로그인 시 열기";
 "Check for Updates…" = "업데이트 확인…";
-"Quit LineNote" = "LineNote 종료";
+"Quit Lineshot" = "Lineshot 종료";
 "Could not change the login setting" = "로그인 설정을 변경할 수 없음";
-"Move LineNote to the Applications folder and try again." = "LineNote를 응용 프로그램 폴더로 옮긴 다음 다시 시도하세요.";
+"Move Lineshot to the Applications folder and try again." = "Lineshot를 응용 프로그램 폴더로 옮긴 다음 다시 시도하세요.";
 "Keep on line" = "빨랫줄에 남길 개수";
 "As many as fit" = "들어가는 만큼";
 "%d items" = "%d개 항목";
@@ -42,7 +42,7 @@
 "Over full screen apps" = "전체 화면 앱 위에서도";
 "Hang copied images" = "복사한 이미지 걸기";
 "Images you copy hang on the line too" = "복사한 이미지도 빨랫줄에 걸려요";
-"LineNote, hanging copied images" = "LineNote, 복사한 이미지 거는 중";
+"Lineshot, hanging copied images" = "Lineshot, 복사한 이미지 거는 중";
 
 /* GrabArea */
 "Copy" = "복사하기";
@@ -65,7 +65,7 @@
 /* Text clippings */
 "Hang copied text" = "복사한 텍스트 걸기";
 "Text you copy hangs on the line too" = "복사한 텍스트도 줄에 걸립니다";
-"LineNote, hanging copied text" = "LineNote, 복사한 텍스트 표시 중";
+"Lineshot, hanging copied text" = "Lineshot, 복사한 텍스트 표시 중";
 "Click to copy text. Hold to preview." = "클릭하여 텍스트 복사. 길게 눌러 미리보기.";
 
 /* Pinned notebook */

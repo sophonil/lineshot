@@ -1,4 +1,4 @@
-// Original LineNote icon artwork: a cream notebook on a deep teal tile.
+// Temporary Lineshot placeholder artwork (replace before public release): a cream notebook on a deep teal tile.
 // Copyright (c) 2026 sophonil. Licensed under the MIT License.
 // Usage: swift scripts/make-icon.swift out.png
 import AppKit

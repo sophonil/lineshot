@@ -1,11 +1,11 @@
 #!/bin/bash
-# Builds LineNote.app into ./build without needing Xcode.
+# Builds Lineshot.app into ./build without needing Xcode.
 # Usage: scripts/build-app.sh [debug|release]
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
 CONFIG="${1:-release}"
-APP="build/LineNote.app"
+APP="build/Lineshot.app"
 VERSION="0.1.0"
 
 # Builds one architecture and prints the binary's path.
@@ -34,18 +34,18 @@ BIN="$OUT/Tendedero"
 
 rm -rf "$APP"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
-cp "$BIN" "$APP/Contents/MacOS/LineNote"
+cp "$BIN" "$APP/Contents/MacOS/Lineshot"
 
 # Icon
 WORK="$(mktemp -d)"
 swift scripts/make-icon.swift "$WORK/icon.png"
-ICONSET="$WORK/LineNote.iconset"
+ICONSET="$WORK/Lineshot.iconset"
 mkdir -p "$ICONSET"
 for s in 16 32 128 256 512; do
   sips -z $s $s "$WORK/icon.png" --out "$ICONSET/icon_${s}x${s}.png" >/dev/null
   sips -z $((s*2)) $((s*2)) "$WORK/icon.png" --out "$ICONSET/icon_${s}x${s}@2x.png" >/dev/null
 done
-swift scripts/make-icns.swift "$ICONSET" "$APP/Contents/Resources/LineNote.icns"
+swift scripts/make-icns.swift "$ICONSET" "$APP/Contents/Resources/Lineshot.icns"
 rm -rf "$WORK"
 
 # Translations: one folder per language, listed in Info.plist so macOS knows
@@ -61,11 +61,11 @@ cat > "$APP/Contents/Info.plist" <<PLIST
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-  <key>CFBundleName</key><string>LineNote</string>
-  <key>CFBundleDisplayName</key><string>LineNote</string>
-  <key>CFBundleIdentifier</key><string>io.github.sophonil.LineNote</string>
-  <key>CFBundleExecutable</key><string>LineNote</string>
-  <key>CFBundleIconFile</key><string>LineNote</string>
+  <key>CFBundleName</key><string>Lineshot</string>
+  <key>CFBundleDisplayName</key><string>Lineshot</string>
+  <key>CFBundleIdentifier</key><string>io.github.sophonil.Lineshot</string>
+  <key>CFBundleExecutable</key><string>Lineshot</string>
+  <key>CFBundleIconFile</key><string>Lineshot</string>
   <key>CFBundlePackageType</key><string>APPL</string>
   <key>CFBundleShortVersionString</key><string>${VERSION}</string>
   <key>CFBundleVersion</key><string>1</string>
@@ -75,11 +75,11 @@ cat > "$APP/Contents/Info.plist" <<PLIST
   <key>LSUIElement</key><true/>
   <key>NSHighResolutionCapable</key><true/>
   <key>NSDesktopFolderUsageDescription</key>
-  <string>LineNote watches the folder where macOS saves your screenshots so it can hang them on the line.</string>
+  <string>Lineshot watches the folder where macOS saves your screenshots so it can hang them on the line.</string>
   <key>NSDocumentsFolderUsageDescription</key>
-  <string>LineNote watches the folder you chose so it can hang new images on the line.</string>
+  <string>Lineshot watches the folder you chose so it can hang new images on the line.</string>
   <key>NSDownloadsFolderUsageDescription</key>
-  <string>LineNote watches the folder you chose so it can hang new images on the line.</string>
+  <string>Lineshot watches the folder you chose so it can hang new images on the line.</string>
 </dict>
 </plist>
 PLIST

@@ -1,8 +1,8 @@
 /* Turkish. */
 
 /* AppDelegate */
-"Let LineNote handle your screenshots?" = "Ekran görüntülerini LineNote yönetsin mi?";
-"Screenshots will hang on the line the instant you take them, without the floating thumbnail, and will not pile up on your Desktop. Drag one to a folder to keep it, or discard it with the cross. You can turn this off from the menu bar, and your settings come back when LineNote quits." = "Ekran görüntüleri, kayan küçük resim olmadan anında ipin üzerine asılacak ve Masaüstünüzde birikmeyecek. Saklamak için bir klasöre sürükleyin ya da çarpı ile silin. Bunu menü çubuğundan kapatabilirsiniz; LineNote kapandığında ayarlarınız geri gelir.";
+"Let Lineshot handle your screenshots?" = "Ekran görüntülerini Lineshot yönetsin mi?";
+"Screenshots will hang on the line the instant you take them, without the floating thumbnail, and will not pile up on your Desktop. Drag one to a folder to keep it, or discard it with the cross. You can turn this off from the menu bar, and your settings come back when Lineshot quits." = "Ekran görüntüleri, kayan küçük resim olmadan anında ipin üzerine asılacak ve Masaüstünüzde birikmeyecek. Saklamak için bir klasöre sürükleyin ya da çarpı ile silin. Bunu menü çubuğundan kapatabilirsiniz; Lineshot kapandığında ayarlarınız geri gelir.";
 "Turn on" = "Etkinleştir";
 "Not now" = "Şimdi değil";
 "Hide line" = "İpi gizle";
@@ -14,9 +14,9 @@
 "Sounds" = "Sesler";
 "Open at login" = "Başlangıçta aç";
 "Check for Updates…" = "Güncellemeleri denetle…";
-"Quit LineNote" = "LineNote'yu kapat";
+"Quit Lineshot" = "Lineshot'yu kapat";
 "Could not change the login setting" = "Giriş ayarı değiştirilemedi";
-"Move LineNote to the Applications folder and try again." = "LineNote'yu Uygulamalar klasörüne taşıyın ve tekrar deneyin.";
+"Move Lineshot to the Applications folder and try again." = "Lineshot'yu Uygulamalar klasörüne taşıyın ve tekrar deneyin.";
 "Keep on line" = "İpte tut";
 "As many as fit" = "Sığdığı kadar";
 "%d items" = "%d öğe";
@@ -42,7 +42,7 @@
 "Over full screen apps" = "Tam ekran uygulamaların üzerinde";
 "Hang copied images" = "Kopyalanan görselleri as";
 "Images you copy hang on the line too" = "Kopyaladığınız görseller de ipe asılır";
-"LineNote, hanging copied images" = "LineNote, kopyalanan görselleri asıyor";
+"Lineshot, hanging copied images" = "Lineshot, kopyalanan görselleri asıyor";
 
 /* GrabArea */
 "Copy" = "Kopyala";
@@ -65,7 +65,7 @@
 /* Text clippings */
 "Hang copied text" = "Kopyalanan metni as";
 "Text you copy hangs on the line too" = "Kopyaladığınız metin de ipe asılır";
-"LineNote, hanging copied text" = "LineNote, kopyalanan metni asıyor";
+"Lineshot, hanging copied text" = "Lineshot, kopyalanan metni asıyor";
 "Click to copy text. Hold to preview." = "Metni kopyalamak için tıklayın. Önizlemek için basılı tutun.";
 
 /* Pinned notebook */

@@ -3,7 +3,7 @@ import AVFoundation
 import Combine
 import os
 
-let log = Logger(subsystem: "io.github.sophonil.LineNote", category: "line")
+let log = Logger(subsystem: "io.github.sophonil.Lineshot", category: "line")
 
 /// One screenshot hanging on the line.
 struct Pegged: Identifiable, Equatable {

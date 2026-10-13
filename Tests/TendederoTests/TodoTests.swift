@@ -96,9 +96,9 @@ final class TodoTests: XCTestCase {
             NotebookMigration.run(defaults: new, legacy: old)
             XCTAssertTrue(TodoStore(defaults: new).items.isEmpty)
             new.removeObject(forKey: "importedLegacyNotebook.v1")
-            TodoStore(defaults: new).notes = "Already using LineNote"
+            TodoStore(defaults: new).notes = "Already using Lineshot"
             NotebookMigration.run(defaults: new, legacy: old)
-            XCTAssertEqual(TodoStore(defaults: new).notes, "Already using LineNote")
+            XCTAssertEqual(TodoStore(defaults: new).notes, "Already using Lineshot")
             XCTAssertEqual(TodoStore(defaults: old).notes, "My notes")
         }
     }

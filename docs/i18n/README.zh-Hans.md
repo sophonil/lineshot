@@ -1,10 +1,12 @@
-# LineNote
+# Lineshot
+
+**本地预览版，尚未发布。** 当前图标为占位，收到正式图标后再发布。
 
 把截图、复制的文本和待办记事本挂在屏幕顶部，随用随取。
 
 这是 sophonil 基于 Alejandro Buján 的 [Tendedero](https://github.com/alejandrobujan/tendedero) 制作的独立 Fork，保留原项目历史与交互风格。不是原作者的官方版本，也不代表原作者认可。本版使用独立名称和新图标。
 
-[English](../../README.md) · [发布版本](https://github.com/sophonil/linenote/releases)
+[English](../../README.md) · [发布版本](https://github.com/sophonil/lineshot/releases)
 
 ## 新增功能
 
@@ -18,20 +20,20 @@
 
 支持 macOS 14 及以后，构建包兼容 Apple 芯片和 Intel Mac。
 
-先退出旧 App，再解压发布 ZIP，将 **LineNote.app** 拖入「应用程序」。本地构建默认使用 ad hoc 签名，未经 Apple 公证；有 Developer ID 时可自行签名。
+先退出旧 App，再解压发布 ZIP，将 **Lineshot.app** 拖入「应用程序」。本地构建默认使用 ad hoc 签名，未经 Apple 公证；有 Developer ID 时可自行签名。
 
-新版使用独立 Bundle ID `io.github.sophonil.LineNote`，截图保存在 `~/Library/Application Support/LineNote/Screenshots`。第一次启动时，会复制之前个人开发版里已有的待办与随手记，不修改旧数据。截图接管、剪贴板开关和旧卡片路径不会迁移，需要时请在菜单重新开启。不要同时运行两份会接管截图的 App。
+新版使用独立 Bundle ID `io.github.sophonil.Lineshot`，截图保存在 `~/Library/Application Support/Lineshot/Screenshots`。第一次启动时，会复制之前个人开发版里已有的待办与随手记，不修改旧数据。截图接管、剪贴板开关和旧卡片路径不会迁移，需要时请在菜单重新开启。不要同时运行两份会接管截图的 App。
 
 不新增账号、分析统计或内容上传。文本保存为本地 UTF-8 文件，创建时仅当前用户可读写；待办和备注使用本地偏好存储。「检查更新」打开此 Fork 的 GitHub 发布页。
 
 ## 从源码构建
 
 ```sh
-git clone https://github.com/sophonil/linenote.git
-cd linenote
+git clone https://github.com/sophonil/lineshot.git
+cd lineshot
 git switch feature/customizations
 scripts/build-app.sh
-open build/LineNote.app
+open build/Lineshot.app
 ```
 
 需要 Swift 工具链。内部模块及源码目录保留 `Tendedero` 名称，方便与上游比较。检查命令：
