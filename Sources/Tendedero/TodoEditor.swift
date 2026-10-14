@@ -37,6 +37,35 @@ private final class TodoEditorPanel: NSPanel {
     override var canBecomeKey: Bool { true }
     override var canBecomeMain: Bool { true }
     override func cancelOperation(_ sender: Any?) { close() }
+
+    /// Accessory apps have no Edit menu to dispatch these key equivalents.
+    /// SwiftUI fields use an NSTextView field editor; notes use NSTextView too.
+    /// Keep dispatch local to the focused text editor so other windows and
+    /// shortcut recording are unaffected.
+    override func performKeyEquivalent(with event: NSEvent) -> Bool {
+        guard event.type == .keyDown, let text = firstResponder as? NSTextView else {
+            return super.performKeyEquivalent(with: event)
+        }
+        let modifiers = event.modifierFlags.intersection([.command, .shift, .option, .control])
+        let key = event.charactersIgnoringModifiers?.lowercased()
+        if modifiers == .command {
+            switch key {
+            case "v" where text.isEditable: text.paste(nil)
+            case "x" where text.isEditable: text.cut(nil)
+            case "c" where text.isSelectable: text.copy(nil)
+            case "a" where text.isSelectable: text.selectAll(nil)
+            case "z" where text.isEditable:
+                if let undo = text.undoManager, undo.canUndo { undo.undo() }
+            default: return super.performKeyEquivalent(with: event)
+            }
+            return true
+        }
+        if modifiers == [.command, .shift], key == "z", text.isEditable {
+            if let undo = text.undoManager, undo.canRedo { undo.redo() }
+            return true
+        }
+        return super.performKeyEquivalent(with: event)
+    }
 }
 
 struct TodoEditorView: View {

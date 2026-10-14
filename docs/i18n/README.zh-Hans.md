@@ -6,9 +6,9 @@
 
 这是 sophonil 基于 Alejandro Buján 的 [Tendedero](https://github.com/alejandrobujan/tendedero) 制作的独立 Fork，保留原项目历史与交互风格。不是原作者的官方版本，也不代表原作者认可。本版使用独立名称和新图标。
 
-[English](../../README.md) · [发布版本](https://github.com/sophonil/lineshot/releases)
+[English](../../README.md) · [更新记录](../../CHANGELOG.md) · [开发分支](https://github.com/sophonil/lineshot/tree/feature/customizations)
 
-## 新增功能
+## 相比原作的新增与修改
 
 - **文本剪贴板**：在菜单中开启「悬挂复制的文本」，复制的纯文本即可上绳。单击复制完整原文，保留换行、缩进和 Unicode。默认关闭，跳过带隐私/临时标记的剪贴板、空白文本和超过 1 MiB 的文本。
 - **固定待办与随手记**：点击第一张卡片即可添加、编辑、勾选、删除待办，下方可以写多行备注。输入后按回车添加待办；已添加的任务和备注自动保存，重启后恢复。
@@ -16,11 +16,17 @@
 
 原来的夹子、玻璃相框、截图操作和自动收起行为保留。「全部取下」只清空截图和文本，不影响待办。App 自己目录中的文件会移到废纸篓，其他位置的文件仅从绳子上移除；没有内容可取下时，该菜单变灰。
 
+## 当前版本
+
+**0.1.1** 修复待办窗口的标准编辑快捷键：新增待办、已有待办和随手记均支持粘贴、复制、剪切、全选、撤销与重做。首版功能与后续修复见[更新记录](../../CHANGELOG.md)。
+
+开发在 `feature/customizations` 分支进行，`main` 保留原作快照。目前尚未在 GitHub Releases 发布二进制安装包，可以按下方说明从源码构建。
+
 ## 安装与数据
 
 支持 macOS 14 及以后，构建包兼容 Apple 芯片和 Intel Mac。
 
-先退出旧 App，再解压发布 ZIP，将 **Lineshot.app** 拖入「应用程序」。本地构建默认使用 ad hoc 签名，未经 Apple 公证；有 Developer ID 时可自行签名。
+如果已获得打包版本，先退出旧 App，再解压 ZIP，将 **Lineshot.app** 拖入「应用程序」。本地构建默认使用 ad hoc 签名，未经 Apple 公证；有 Developer ID 时可自行签名。
 
 新版使用独立 Bundle ID `io.github.sophonil.Lineshot`，截图保存在 `~/Library/Application Support/Lineshot/Screenshots`。第一次启动时，会复制之前个人开发版里已有的待办与随手记，不修改旧数据。截图接管、剪贴板开关和旧卡片路径不会迁移，需要时请在菜单重新开启。不要同时运行两份会接管截图的 App。
 
